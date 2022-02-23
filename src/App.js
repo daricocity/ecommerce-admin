@@ -12,7 +12,14 @@ import ProductList from './pages/productList/ProductList';
 import {Routes, Route, BrowserRouter as Router, Navigate} from 'react-router-dom';
 
 const Apps = () => {
-    const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin;
+    // const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin;
+    const admin = () => {
+        if(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin){
+            return JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin
+        } else {
+            return ''
+        }
+    }
     return (
         <Router>
             {admin ? (
