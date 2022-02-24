@@ -8,6 +8,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Product = () => {
+    document.title = 'Wolmart | Product';
     const location = useLocation();
     const dispatch = useDispatch();
     const productId = location.pathname.split('/')[2];

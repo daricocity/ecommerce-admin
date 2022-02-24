@@ -4,6 +4,7 @@ import { login } from "../../apiCall";
 import { useDispatch } from 'react-redux';
 
 const Login = () => {
+    document.title = 'Wolmart | Login';
     const dispatch = useDispatch()
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,7 +13,6 @@ const Login = () => {
         e.preventDefault();
         login(dispatch, {username, password});
     }
-
     return (
         <div style={{
             height:'100vh', 

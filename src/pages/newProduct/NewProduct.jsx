@@ -6,6 +6,7 @@ import { addProduct } from '../../apiCall';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const NewProduct = () => {
+    document.title = 'Wolmart | Add Product';
     const dispatch = useDispatch();
     const [file, setFile] = useState(null);
     const [inputs, setInputs] = useState({});

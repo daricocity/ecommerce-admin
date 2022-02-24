@@ -7,6 +7,7 @@ import { deleteProduct, getProducts } from '../../apiCall';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
 
 const ProductList = () => {
+    document.title = 'Wolmart | Product List';
     const dispatch = useDispatch();
     const products = useSelector(state => state.product.products)
 
@@ -26,7 +27,7 @@ const ProductList = () => {
             return (
                 <>
                 <div classmane='productListItem'>
-                    <img className='productListImg' src={params.row.img} alt='' />
+                    <img className='productListImg' src={'/'+params.row.img} alt='' />
                 </div>
                 {params.row.title}
                 </>

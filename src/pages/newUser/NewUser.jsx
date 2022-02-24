@@ -1,6 +1,7 @@
 import './newUser.css';
 
 const NewUser = () => {
+    document.title = 'Wolmart | Add User';
     return (
         <div className='newUser'>
             <h1 className="newUserTitle">New User</h1>

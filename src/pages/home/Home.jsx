@@ -8,7 +8,7 @@ import WidgetLg from '../../components/widgetLg/WidgetLg';
 import FeacturedInfo from '../../components/featuredinfo/FeaturedInfo';
 
 const Home = () => {
-
+    document.title = 'Wolmart | Dashboard';
     const [userStats, setUserStats] = useState([]);
     const MONTHS = useMemo(() => ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],[]);
     useEffect(() => {

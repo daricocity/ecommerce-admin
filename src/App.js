@@ -9,10 +9,9 @@ import UserList from './pages/userList/UserList';
 import Sidebar from './components/sidebar/Sidebar';
 import NewProduct from './pages/newProduct/NewProduct';
 import ProductList from './pages/productList/ProductList';
-import {Routes, Route, BrowserRouter as Router, Navigate} from 'react-router-dom';
+import { Routes, Route, BrowserRouter as Router, Navigate } from 'react-router-dom';
 
 const Apps = () => {
-    
     const admin = () => {
         if(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin){
             return JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin
