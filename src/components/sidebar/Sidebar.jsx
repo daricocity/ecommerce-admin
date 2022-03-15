@@ -1,5 +1,7 @@
 import './sidebar.css';
+import { logout } from '../../apiCall'
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Report from '@material-ui/icons/Report';
 import BarChart from '@material-ui/icons/BarChart';
 import Timeline from '@material-ui/icons/Timeline';
@@ -14,6 +16,7 @@ import PermIdentity from '@material-ui/icons/PermIdentity';
 import ChatBubbleOutline from '@material-ui/icons/ChatBubbleOutline';
 
 const Sidebar = () => {
+    const dispatch = useDispatch();
     return (
         <div className='sidebar'>
             <div className="sidebarWrapper">
@@ -79,6 +82,9 @@ const Sidebar = () => {
                         </li>
                         <li className="sidebarListItem">
                             <Report className='sidebarIcon'/> Reports
+                        </li>
+                        <li className="sidebarListItem" onClick={() => logout(dispatch)}>
+                            <Report className='sidebarIcon'/> Logout
                         </li>
                     </ul>
                 </div>

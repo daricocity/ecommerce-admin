@@ -1,17 +1,20 @@
 import './login.css';
-import { useState } from "react";
+import { useState} from "react";
 import { login } from "../../apiCall";
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     document.title = 'Wolmart | Login';
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleClick = (e) => {
         e.preventDefault();
         login(dispatch, {username, password});
+        navigate('/')
     }
     return (
         <div style={{

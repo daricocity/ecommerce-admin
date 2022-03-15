@@ -2,6 +2,7 @@ import './productList.css';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { DataGrid } from '@material-ui/data-grid';
+import { CircularProgress } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProduct, getProducts } from '../../apiCall';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
@@ -9,7 +10,8 @@ import DeleteOutline from '@material-ui/icons/DeleteOutline';
 const ProductList = () => {
     document.title = 'Wolmart | Product List';
     const dispatch = useDispatch();
-    const products = useSelector(state => state.product.products)
+    const { products } = useSelector(state => state.product);
+    const productList = products !==null && products !== undefined && products.length > 0 && products
 
     // GET PRODUCTS
     useEffect(() => {
@@ -23,13 +25,13 @@ const ProductList = () => {
 
     const columns = [
         { field: '_id', headerName: 'ID', width: 220 },
-        { field: 'product', headerName: 'Product', width: 180, renderCell: (params) => {
+        { field: 'product', headerName: 'Product', width: 240, renderCell: (params) => {
             return (
                 <>
-                <div classmane='productListItem'>
-                    <img className='productListImg' src={'/'+params.row.img} alt='' />
-                </div>
-                {params.row.title}
+                    <div classmane='productListItem'>
+                        <img className='productListImg' src={params.row.img} alt='' />
+                    </div>
+                    {params.row.title}
                 </>
             )
         } },
@@ -47,19 +49,32 @@ const ProductList = () => {
                     />
                 </>
             )
-        } },
+        }},
     ];
 
     return (
         <div className='productList'>
-            <DataGrid  
-                rows={products} 
-                columns={columns} 
-                getRowId={row => row._id}
-                pageSize={5} 
-                checkboxSelection
-                disableSelectionOnClick
-            />
+            {productList.length > 0 ? (
+                <DataGrid  
+                    rows={productList} 
+                    columns={columns} 
+                    getRowId={row => row._id}
+                    pageSize={10} 
+                    checkboxSelection
+                    disableSelectionOnClick
+                />
+            ) : (
+                <div style={{
+                    width: "100%",
+                    height: "20vh",
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: 'transparent'
+                }}>
+                    <CircularProgress />
+                </div>
+            )}
         </div>
     )
 };

@@ -13,9 +13,10 @@ const Product = () => {
     const dispatch = useDispatch();
     const productId = location.pathname.split('/')[2];
     const [productStat, setProductStat] = useState([]);
-    const product = useSelector(state => state.product.products.find(product => product._id === productId))
+    // const product = useSelector(state => state.product.products.find(product => product._id === productId))
+    const { products } = useSelector(state => state.product);
+    const product = products !==null && products!== undefined && products.length > 0 && products.find(pro => pro._id === productId)
     const MONTHS = useMemo(() => ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],[]);
-
     const [inputs, setInputs] = useState(product);
 
     const handleChange = (e) => {
@@ -124,7 +125,7 @@ const Product = () => {
                     <div className="productFormRight">
                         <div className="productUpload">
                             <img src={product.img} alt="" className="productUploadImg" />
-                            <label for='file'><Publish/></label>
+                            <label htmlFor='file'><Publish/></label>
                             <input type='file' id='file' style={{display:'none'}} />
                         </div>
                         <button className="productButton" onClick={handleSubmit}>Update</button>

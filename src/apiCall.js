@@ -1,5 +1,20 @@
 import { publicRequest, userRequest } from './utils';
-import { loginStart, loginSuccess, loginFailure } from './redux/userRedux';
+import {
+    loginStart, 
+    loginSuccess, 
+    loginFailure, 
+    logoutSuccess, 
+    getUserStart, 
+    getUserSuccess, 
+    getUserFailure, 
+    deleteUserStart,
+    deleteUserSuccess,
+    deleteUserFailure,
+    updateUserStart,
+    updateUserSuccess,
+    updateUserFailure,
+} from './redux/userRedux';
+
 import { 
     getProductStart, 
     getProductSuccess, 
@@ -12,7 +27,7 @@ import {
     updateProductFailure ,
     addProductStart, 
     addProductSuccess, 
-    addProductFailure 
+    addProductFailure,
 } from './redux/productRedux';
 
 // LOGIN
@@ -25,6 +40,12 @@ export const login = async (dispatch, user) => {
         dispatch(loginFailure());
     }
 };
+
+// LOGOUT
+export const logout = (dispatch) => {
+    dispatch(logoutSuccess());
+    window.location.href = "/login"
+}
 
 // GET PRODUCTS
 export const getProducts = async (dispatch) => {
@@ -41,8 +62,7 @@ export const getProducts = async (dispatch) => {
 export const deleteProduct = async (id, dispatch) => {
     dispatch(deleteProductStart());
     try{
-        const res = await userRequest.delete(`/products/${id}`);
-        console.log(res);
+        await userRequest.delete(`/products/${id}`);
         dispatch(deleteProductSuccess(id));
     } catch (err) {
         dispatch(deleteProductFailure());
@@ -53,6 +73,7 @@ export const deleteProduct = async (id, dispatch) => {
 export const updateProduct = async (id, product, dispatch) => {
     dispatch(updateProductStart());
     try{
+        await userRequest.put(`/products/${id}`, product);
         dispatch(updateProductSuccess({id, product}));
     } catch (err) {
         dispatch(updateProductFailure());
@@ -67,5 +88,38 @@ export const addProduct = async (product, dispatch) => {
         dispatch(addProductSuccess(res.data));
     } catch (err) {
         dispatch(addProductFailure());
+    }
+};
+
+// DELETE PRODUCT
+export const deleteUser = async (id, dispatch) => {
+    dispatch(deleteUserStart());
+    try{
+        await userRequest.delete(`/users/${id}`);
+        dispatch(deleteUserSuccess(id));
+    } catch (err) {
+        dispatch(deleteUserFailure());
+    }
+};
+
+// GET USERS
+export const getUsers = async (dispatch) => {
+    dispatch(getUserStart());
+    try{
+        const res = await userRequest.get("/users");
+        dispatch(getUserSuccess(res.data));
+    } catch (err) {
+        dispatch(getUserFailure());
+    }
+};
+
+// UPDATE USER
+export const updateUser = async (id, data, dispatch) => {
+    dispatch(updateUserStart());
+    try{
+        await userRequest.put(`/users/${id}`, data);
+        dispatch(updateUserSuccess({id, data}));
+    } catch (err) {
+        dispatch(updateUserFailure());
     }
 };

@@ -20,29 +20,32 @@ const Apps = () => {
         }
     }
     return (
-        <Router>
-            {admin ? (
-                <div className="App">
-                    <Topbar/>
-                    <div className='container'>
-                        <Sidebar/>
-                        <Routes>
-                            <Route exact path='/' element={<Home/>} />
-                            <Route path='/users' element={<UserList/>} />
-                            <Route path='/newUser' element={<NewUser/>} />
-                            <Route path='/user/:userId' element={<User/>} />
-                            <Route path='/products' element={<ProductList/>} />
-                            <Route path='/newproduct' element={<NewProduct/>} />
-                            <Route path='/product/:productId' element={<Product/>} />
-                        </Routes>
-                    </div>
-                </div>
-            ) : (
+        <>
+            <Router>
                 <Routes>
-                    <Route path='/login' element={admin ? <Navigate to="/" /> : <Login/>} />
+                    <Route path='/login' element={admin === true ? <Navigate to="/" /> : <Login/>} />
                 </Routes>
+            </Router>
+            {admin && (
+                <Router>
+                    <div className="App">
+                        <Topbar/>
+                        <div className='container'>
+                            <Sidebar/>
+                            <Routes>
+                                <Route exact path='/' element={<Home/>} />
+                                <Route path='/users' element={<UserList/>} />
+                                <Route path='/newUser' element={<NewUser/>} />
+                                <Route path='/user/:userId' element={<User/>} />
+                                <Route path='/products' element={<ProductList/>} />
+                                <Route path='/newproduct' element={<NewProduct/>} />
+                                <Route path='/product/:productId' element={<Product/>} />
+                            </Routes>
+                        </div>
+                    </div>
+                </Router>
             )}
-        </Router>
+        </>
     )
 };
 
